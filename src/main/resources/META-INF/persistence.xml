@@ -2,7 +2,7 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
     <persistence-unit name="entityManager" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <class>com.juri.words.entity.Account</class>
+        <class>com.juri.words.entity.Word</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <validation-mode>NONE</validation-mode>
         <properties>

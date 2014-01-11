@@ -237,7 +237,7 @@
                     <arguments>
                         <argument>${project.basedir}/target/schema.sql</argument>
                         <argument>com.juri.words.entity</argument>
-                        <argument>org.hibernate.dialect.MySQLDialect</argument>
+                        <argument>org.hibernate.dialect.HSQLDialect</argument>
                     </arguments>
                 </configuration>
             </plugin>

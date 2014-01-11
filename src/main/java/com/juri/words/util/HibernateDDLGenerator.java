@@ -13,11 +13,8 @@ import java.util.Enumeration;
 import java.util.LinkedList;
 
 /**
- * Created with IntelliJ IDEA.
  * User: cmiel
  * Date: 04.01.14
- * Time: 18:14
- * To change this template use File | Settings | File Templates.
  */
 
 

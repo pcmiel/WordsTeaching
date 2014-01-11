@@ -6,13 +6,9 @@ import javax.persistence.criteria.CriteriaQuery;
 
 import java.util.List;
 /**
- * Created with IntelliJ IDEA.
  * User: cmiel
  * Date: 04.01.14
- * Time: 18:05
- * To change this template use File | Settings | File Templates.
  */
-@SuppressWarnings("unchecked")
 public abstract class AbstractFacade<T> {
 
     @PersistenceContext(unitName = "entityManager")

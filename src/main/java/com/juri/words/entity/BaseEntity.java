@@ -9,11 +9,8 @@ import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
 /**
- * Created with IntelliJ IDEA.
  * User: cmiel
  * Date: 04.01.14
- * Time: 18:02
- * To change this template use File | Settings | File Templates.
  */
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {

@@ -1,9 +1,9 @@
 package com.juri.words.controller;
 
-import com.juri.words.entity.Account;
-import com.juri.words.facade.AccountFacade;
-import com.juri.words.form.RegistrationForm;
+import com.juri.words.entity.Word;
+import com.juri.words.facade.WordFacade;
 
+import com.juri.words.form.WordForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,17 +15,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created with IntelliJ IDEA.
  * User: cmiel
  * Date: 04.01.14
- * Time: 18:10
- * To change this template use File | Settings | File Templates.
  */
 @Controller
 public class RegistrationController {
 
     @Autowired
-    private AccountFacade accountFacade;
+    private WordFacade wordFacade;
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public String showMainView() {
@@ -33,30 +30,28 @@ public class RegistrationController {
     }
 
     @ModelAttribute("index")
-    public RegistrationForm getRegistrationForm() {
-        return new RegistrationForm();
+    public WordForm getWordForm() {
+        return new WordForm();
     }
 
     @Transactional
     @RequestMapping(value = "index", method = RequestMethod.POST)
-    public String processRegisterUser(@ModelAttribute("index") RegistrationForm form) {
+    public String processAddWord(@ModelAttribute("index") WordForm form) {
 
-        Account account = new Account();
-        account.setName(form.getName());
-        account.setEmail(form.getEmail());
-        account.setUsername(form.getUsername());
-        account.setPassword(form.getPassword());
-
-        accountFacade.create(account);
+        Word word = new Word();
+        word.setOryginal(form.getOryginal());
+        word.setForeignWord(form.getForeignWord());
+        word.setKnowValue(0);
+        wordFacade.create(word);
 
         return "index";
     }
 
     @Transactional
-    @RequestMapping(value = "index/show-users", method = RequestMethod.GET)
-    public String showAllUsers(Map<String, Object> model) {
-        List<Account> accounts = accountFacade.findAll();
-        model.put("accounts", accounts);
+    @RequestMapping(value = "index/show-words", method = RequestMethod.GET)
+    public String showAllWords(Map<String, Object> model) {
+        List<Word> words = wordFacade.findAll();
+        model.put("words", words);
         return "index";
     }
 

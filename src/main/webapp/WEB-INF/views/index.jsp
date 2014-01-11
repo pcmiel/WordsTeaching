@@ -6,12 +6,10 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%--@elvariable id="accounts" type="java.util.List<com.paulius.hibernateviajpa.entity.Account>"--%>
-
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Hibernate Via JPA Example</title>
+    <title>Words Teaching</title>
     <style type="text/css">
         .label {
             display: block;
@@ -19,32 +17,22 @@
     </style>
 </head>
 <body>
-<h1>Hibernate Via JPA Example Application</h1>
+<h1>Words Teaching Application</h1>
 
 <form:form action="${pageContext.servletContext.contextPath}/index.htm" commandName="index">
 
     <div>
-        <form:label cssClass="label" path="name">Name: </form:label>
-        <form:input path="name"/>
+        <form:label cssClass="label" path="oryginal">Native: </form:label>
+        <form:input path="oryginal"/>
     </div>
 
     <div>
-        <form:label cssClass="label" path="email">Email address: </form:label>
-        <form:input path="email"/>
+        <form:label cssClass="label" path="foreignWord">Foreign: </form:label>
+        <form:input path="foreignWord"/>
     </div>
 
     <div>
-        <form:label cssClass="label" path="username">Username: </form:label>
-        <form:input path="username"/>
-    </div>
-
-    <div>
-        <form:label cssClass="label" path="password">Password: </form:label>
-        <form:password path="password"/>
-    </div>
-
-    <div>
-        <input type="submit" value="Register user"/>
+        <input type="submit" value="Add word"/>
     </div>
 
 </form:form>
@@ -52,26 +40,24 @@
 <hr/>
 
 <div>
-    <a href="${pageContext.servletContext.contextPath}/index/show-users.htm">Show all users</a>
+    <a href="${pageContext.servletContext.contextPath}/index/show-words.htm">Show all words</a>
 
-    <c:if test="${not empty accounts}">
+    <c:if test="${not empty words}">
         <div>
-            <h3>Registered Users:</h3>
+            <h3>Words:</h3>
 
             <table border="1">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Username</th>
+                    <th>Native</th>
+                    <th>Foreign</th>
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="account" items="${accounts}">
+                <c:forEach var="word" items="${words}">
                     <tr>
-                        <td><c:out value="${account.name}"/></td>
-                        <td><c:out value="${account.email}"/></td>
-                        <td><c:out value="${account.username}"/></td>
+                        <td><c:out value="${word.oryginal}"/></td>
+                        <td><c:out value="${word.foreignWord}"/></td>
                     </tr>
                 </c:forEach>
                 </tbody>
