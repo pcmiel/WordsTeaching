@@ -19,7 +19,7 @@ import java.util.Map;
  * Date: 04.01.14
  */
 @Controller
-public class RegistrationController {
+public class WordsController {
 
     @Autowired
     private WordFacade wordFacade;
@@ -53,6 +53,14 @@ public class RegistrationController {
         List<Word> words = wordFacade.findAll();
         model.put("words", words);
         return "index";
+    }
+
+    @Transactional
+    @RequestMapping(value = "allwords", method = RequestMethod.GET)
+    public String showAllWords2(Map<String, Object> model) {
+        List<Word> words = wordFacade.findAll();
+        model.put("words", words);
+        return "allwords";
     }
 
 }
