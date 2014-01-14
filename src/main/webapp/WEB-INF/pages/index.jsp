@@ -12,24 +12,33 @@
     <title>Words Teaching</title>
 </head>
 <body>
-<h1>Words Teaching Application</h1>
-
+<div class="page-header">
+    <h1>Words Teaching Application</h1>
+</div>
 <form:form action="${pageContext.servletContext.contextPath}/index.htm" commandName="index">
-
-    <div>
-        <form:label path="oryginal">Native: </form:label>
-        <form:input path="oryginal"/>
+    <div class="span6 offset3">
+        <table>
+            <thead>
+            <tr>
+                <th>Native</th>
+                <th>Foreign</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><form:input path="oryginal"/></td>
+                <td><form:input path="foreignWord"/></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 
     <div>
-        <form:label  path="foreignWord">Foreign: </form:label>
-        <form:input path="foreignWord"/>
+        <input type="submit" class="btn btn-info btn-lg" value="Add word"/>
     </div>
-
-    <div>
-        <input type="submit" value="Add word"/>
+    <div class="alert alert-success">
+        <c:out value="${info}"/>
     </div>
-
 </form:form>
 
 <hr/>
