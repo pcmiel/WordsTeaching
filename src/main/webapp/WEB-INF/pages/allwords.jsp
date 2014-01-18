@@ -9,11 +9,12 @@
     <title></title>
 </head>
 <body>
-<div>
-    <h3>Words:</h3>
-
-    <table border="1">
-        <thead>
+<div class="page-header">
+    <h1>Words:</h1>
+</div>
+<div class="span6 offset3">
+    <table class="table table-hover ">
+        <thead class="panel-heading">
         <tr>
             <th></th>
             <th>Native</th>
