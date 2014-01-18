@@ -9,3 +9,12 @@ User story
 4) Logowanie u¿ytkowników. Ka¿dy u¿ytkownik posiada osobny zestaw s³ów.
 
 5) Eksport/import s³ów z/do pliku.
+
+
+
+Taski:
+1)
+	I) Dodawanie s³ów. Uniemo¿liwiæ dodanie pustego s³owa. Po dodaniu s³owa poinforowaæ o dodaniu, pozostaæ na stronie dodawania. (DONE)
+	II)Usuwanie s³owa z listy, odœwierzanie listy. (DONE)
+	III) Edycja wszystkich pól w nowym oknie. Po ukoñczeniu edycji powrót do listy
+	IV) dodaæ wyœwietlanie aktualnej wartoœci, dady ostatniej próby, iloœci prób

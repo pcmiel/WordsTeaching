@@ -8,8 +8,12 @@ import com.juri.words.form.WordForm;
  * Date: 14.01.14
  */
 public class InformationGenerator {
-    public static String wordAdded(Word word) {
-        String info = "Added " + word.getForeignWord() + " - " + word.getOryginal();
+    public static String wordAddedCorectly() {
+        String info = "Added new word";
         return info;
+    }
+    
+    public static String wordToShort(){
+        return "Minimal length of word is 1. Word not added";
     }
 }

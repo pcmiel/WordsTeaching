@@ -1,5 +1,6 @@
-    package com.juri.words.controller;
+package com.juri.words.controller;
 
+import com.google.common.base.Strings;
 import com.juri.words.entity.Word;
 import com.juri.words.facade.WordFacade;
 
@@ -8,11 +9,9 @@ import com.juri.words.util.InformationGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -29,7 +28,7 @@ public class WordsController {
     private WordFacade wordFacade;
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
-    public ModelAndView  showMainView(@ModelAttribute("changepassword")String info) {
+    public ModelAndView showMainView(@ModelAttribute("changepassword") String info) {
         ModelAndView mv = new ModelAndView("index");
         return mv;
     }
@@ -41,16 +40,22 @@ public class WordsController {
 
     @Transactional
     @RequestMapping(value = "index", method = RequestMethod.POST)
-    public ModelAndView processAddWord(@ModelAttribute("index") WordForm form) {
+    public ModelAndView addWord(@ModelAttribute("index") WordForm form) {
         ModelAndView mv = new ModelAndView("index");
-        Word word = new Word();
-        word.setOryginal(form.getOryginal());
-        word.setForeignWord(form.getForeignWord());
-        word.setKnowValue(0);
-        wordFacade.create(word);
-        form.setOryginal("");
-        form.setForeignWord("");
-        mv.addObject("info", InformationGenerator.wordAdded(word));
+        String info;
+        if (Strings.isNullOrEmpty(form.getOryginal()) || Strings.isNullOrEmpty(form.getForeignWord())) {
+            info = InformationGenerator.wordToShort();
+        } else {
+            Word word = new Word();
+            word.setOryginal(form.getOryginal());
+            word.setForeignWord(form.getForeignWord());
+            word.setKnowValue(0);
+            wordFacade.create(word);
+            form.setOryginal("");
+            form.setForeignWord("");
+            info = InformationGenerator.wordAddedCorectly();
+        }
+        mv.addObject("info", info);
         return mv;
     }
 
@@ -60,6 +65,26 @@ public class WordsController {
         List<Word> words = wordFacade.findAll();
         model.put("words", words);
         return "allwords";
+    }
+
+    @Transactional
+    @RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
+    public ModelAndView editWord(Map<String, Object> model, @PathVariable Long id) {
+        List<Word> words = wordFacade.findAll();
+        model.put("words", words);
+        ModelAndView mv = new ModelAndView("allwords");
+        return mv;
+    }
+
+    @Transactional
+    @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
+    public ModelAndView deleteWord(Map<String, Object> model, @PathVariable Long id) {
+        Word toRemove = wordFacade.find(id);
+        wordFacade.remove(toRemove);
+        List<Word> words = wordFacade.findAll();
+        model.put("words", words);
+        ModelAndView mv = new ModelAndView("allwords");
+        return mv;
     }
 
 }

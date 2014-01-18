@@ -26,16 +26,19 @@
         <% int id = 1; %>
         <c:forEach var="word" items="${words}">
             <%--<form:form action="${pageContext.servletContext.contextPath}/edit.htm" commandName="word">--%>
-            <tr>
-                <td><%=id%>
-                </td>
-                <td><c:out value="${word.oryginal}"/></td>
-                <td><c:out value="${word.foreignWord}"/></td>
-                    <%--<td><input type="submit" class="btn btn-default" value="Edit" name="edit"/></td>--%>
-                <td><input name="id" value="${word.id}"></td>
-                <td><a href="${pageContext.request.contextPath}/edit/${word.id}.htm">Edit</a></td>
-                <td><a href="${pageContext.request.contextPath}/delete/${word.id}.htm">Delete</a></td>
-            </tr>
+                <tr>
+                    <td><%=id%>
+                    </td>
+                    <td><c:out value="${word.oryginal}"/></td>
+                    <td><c:out value="${word.foreignWord}"/></td>
+                        <%--<td><input type="submit" class="btn btn-default" value="Edit" name="edit"/></td>--%>
+                    <td><input name="id" value="${word.id}"></td>
+
+                    <td class="span1">
+                        <a href="${pageContext.request.contextPath}/edit.htm">Edit</a>
+
+                    </td>
+                </tr>
             <%--</form:form>--%>
             <% id++; %>
         </c:forEach>
