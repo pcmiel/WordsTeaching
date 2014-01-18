@@ -1,0 +1,11 @@
+User story
+
+1) U¿ytkownik ma mo¿liwoœæ dodawania nowych s³ów, edycji oraz usuwania. Walidacja powinna zabroniæ dodawania pustych s³ów. Ka¿de s³owo posiada wartoœæ okreœlaj¹c¹ wiedzê u¿ytkownika oraz datê ostatniego zapytania.
+
+2) Æwicznenie polega na losowym wyœwietlaniu s³ów, przy czym najpierw wyœwietlane jest zapytanie a nastêpnie odpowiedŸ. jeœli odowiedŸ jest poprawna, wtedy wciskamy +, w przciwnym przypadku -. Aktualizowana zostaje wartoœæ.
+
+3) U¿ytkownik ma mo¿liwoœæ podej¿eæ raport o iloœci s³ów przerobionych w danym dniu (mo¿liwoœæ zmiany daty, do sprawdzania wczeœniejszych dni) oraz zmianê wartoœci poszczególnych s³ów.
+
+4) Logowanie u¿ytkowników. Ka¿dy u¿ytkownik posiada osobny zestaw s³ów.
+
+5) Eksport/import s³ów z/do pliku.
