@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="page-header">
-    <h1>Words Teaching Application</h1>
+    <h1>Add new word</h1>
 </div>
 <form:form action="${pageContext.servletContext.contextPath}/index.htm" commandName="index">
     <div class="span6 offset3">

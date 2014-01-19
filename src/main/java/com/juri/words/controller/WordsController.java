@@ -14,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -69,10 +70,31 @@ public class WordsController {
 
     @Transactional
     @RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
-    public ModelAndView editWord(Map<String, Object> model, @PathVariable Long id) {
+    public ModelAndView preEditWord(@ModelAttribute WordForm wordForm, @PathVariable Long id) {
+        Word word = wordFacade.find(id);
+        wordForm.setKnowVal(word.getKnowValue());
+        wordForm.setOryginal(word.getOryginal());
+        wordForm.setForeignWord(word.getForeignWord());
+        wordForm.setID(word.getId());
+        ModelAndView mv = new ModelAndView("edit");
+        return mv;
+    }
+
+    @ModelAttribute("edit")
+    public WordForm editWordForm() {
+        return new WordForm();
+    }
+
+    @RequestMapping(value="/edit", method=RequestMethod.POST)
+    public ModelAndView editWord(@ModelAttribute("edit") WordForm wordForm) {
+     Word toEdit = wordFacade.find(wordForm.getID());
+       
+        toEdit.setForeignWord(wordForm.getForeignWord());
+        toEdit.setOryginal(wordForm.getOryginal());
+        toEdit.setKnowValue(wordForm.getKnowVal());
+        wordFacade.edit(toEdit);
         List<Word> words = wordFacade.findAll();
-        model.put("words", words);
-        ModelAndView mv = new ModelAndView("allwords");
+        ModelAndView mv = new ModelAndView("allwords", "words", words);
         return mv;
     }
 
@@ -80,6 +102,7 @@ public class WordsController {
     @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
     public ModelAndView deleteWord(Map<String, Object> model, @PathVariable Long id) {
         Word toRemove = wordFacade.find(id);
+        
         wordFacade.remove(toRemove);
         List<Word> words = wordFacade.findAll();
         model.put("words", words);

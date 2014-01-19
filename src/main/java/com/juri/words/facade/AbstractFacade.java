@@ -1,5 +1,7 @@
 package com.juri.words.facade;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
@@ -9,6 +11,7 @@ import java.util.List;
  * User: cmiel
  * Date: 04.01.14
  */
+@Transactional
 public abstract class AbstractFacade<T> {
 
     @PersistenceContext(unitName = "entityManager")

@@ -10,6 +10,15 @@ public class WordForm implements Serializable {
     private String oryginal;
     private String foreignWord;
     private Integer knowVal;
+    private Long ID;
+
+    public Long getID() {
+        return ID;
+    }
+
+    public void setID(Long ID) {
+        this.ID = ID;
+    }
 
     public String getOryginal() {
         return oryginal;

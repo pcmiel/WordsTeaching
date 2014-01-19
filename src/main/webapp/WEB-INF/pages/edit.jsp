@@ -1,50 +1,52 @@
+<!DOCTYPE html>
+
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--
-  User: cmiel
-  Date: 11.01.14
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
-    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Words Teaching</title>
 </head>
 <body>
 <div class="page-header">
-    <h1>Words:</h1>
+    <h1>Edit</h1>
 </div>
-<div class="span6 offset3">
-    <table class="table table-hover ">
-        <thead class="panel-heading">
-        <tr>
-            <th></th>
-            <th>Native</th>
-            <th>Foreign</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% int id = 1; %>
-        <c:forEach var="word" items="${words}">
-            <%--<form:form action="${pageContext.servletContext.contextPath}/edit.htm" commandName="word">--%>
-                <tr>
-                    <td><%=id%>
-                    </td>
-                    <td><c:out value="${word.oryginal}"/></td>
-                    <td><c:out value="${word.foreignWord}"/></td>
-                        <%--<td><input type="submit" class="btn btn-default" value="Edit" name="edit"/></td>--%>
-                    <td><input name="id" value="${word.id}"></td>
+<form:form action="${pageContext.servletContext.contextPath}/edit.htm" commandName="edit">
+    <div class="span6 offset3">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Native</th>
+                <th>Foreign</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><form:input path="ID" value="${wordForm.ID}" readonly="true"/></td>
+                <td><form:input path="oryginal" value="${wordForm.oryginal}"/></td>
+                <td><form:input path="foreignWord" value="${wordForm.foreignWord}"/></td>
+                <td><form:input path="knowVal" value="${wordForm.knowVal}"/></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-                    <td class="span1">
-                        <a href="${pageContext.request.contextPath}/edit.htm">Edit</a>
+    <div>
+        <input type="submit" class="btn btn-info btn-lg" value="Edit"/>
+    </div>
+    <div class="alert alert-success">
+        <c:out value="${info}"/>
+    </div>
+</form:form>
 
-                    </td>
-                </tr>
-            <%--</form:form>--%>
-            <% id++; %>
-        </c:forEach>
-        </tbody>
-    </table>
+<hr/>
 
-</div>
+
 </body>
 </html>
