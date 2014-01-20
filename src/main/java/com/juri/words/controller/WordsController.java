@@ -14,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +52,9 @@ public class WordsController {
             word.setOryginal(form.getOryginal());
             word.setForeignWord(form.getForeignWord());
             word.setKnowValue(0);
+            word.setQuestionNumber(6);
+            word.setLastQuestionDate(new Date());
+            
             wordFacade.create(word);
             form.setOryginal("");
             form.setForeignWord("");

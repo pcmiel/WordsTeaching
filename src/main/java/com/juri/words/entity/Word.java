@@ -1,6 +1,7 @@
 package com.juri.words.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * User: cmiel
@@ -19,6 +20,28 @@ public class Word  extends BaseEntity {
     
     @Column(name="KNOW_VALUE", nullable = false)
     private Integer knowValue;
+    
+    @Column(name="LAST_QUESTION_DATE", nullable = false)
+    private Date lastQuestionDate;
+
+    @Column(name="QUESTION_NUMBER", nullable = false)
+    private Integer questionNumber;
+
+    public Integer getQuestionNumber() {
+        return questionNumber;
+    }
+
+    public void setQuestionNumber(Integer questionNumber) {
+        this.questionNumber = questionNumber;
+    }
+
+    public Date getLastQuestionDate() {
+        return lastQuestionDate;
+    }
+
+    public void setLastQuestionDate(Date lastQuestionDate) {
+        this.lastQuestionDate = lastQuestionDate;
+    }
 
     public String getOryginal() {
         return oryginal;
