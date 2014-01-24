@@ -1,23 +1,18 @@
 package com.juri.words.controller;
 
-import com.google.common.base.Strings;
 import com.juri.words.entity.Word;
 import com.juri.words.facade.WordFacade;
 
 import com.juri.words.form.WordForm;
 import com.juri.words.util.InformationGenerator;
+import com.juri.words.util.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * User: cmiel
@@ -45,7 +40,7 @@ public class WordsController {
     public ModelAndView addWord(@ModelAttribute("index") WordForm form) {
         ModelAndView mv = new ModelAndView("index");
         String info;
-        if (Strings.isNullOrEmpty(form.getOryginal()) || Strings.isNullOrEmpty(form.getForeignWord())) {
+        if (Tools.isNullOrEmpty(form.getOryginal()) || Tools.isNullOrEmpty(form.getForeignWord())) {
             info = InformationGenerator.wordToShort();
         } else {
             Word word = new Word();
@@ -112,6 +107,16 @@ public class WordsController {
         model.put("words", words);
         ModelAndView mv = new ModelAndView("allwords");
         return mv;
+    }
+
+    @Transactional
+    @RequestMapping(value = "question", method = RequestMethod.GET)
+    public ModelAndView question(Map<String, Object> model) {
+        List<Word> words = wordFacade.findAll();
+        Random rand = new Random();
+        int wordIndex = rand.nextInt(words.size());
+        Word word = words.get(wordIndex);
+        return new ModelAndView("question", "word", word);
     }
 
 }

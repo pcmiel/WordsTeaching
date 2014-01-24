@@ -10,6 +10,8 @@ User story
 
 5) Eksport/import s³ów z/do pliku.
 
+6) Zapytania o s³owa powinny byæ generowane w sposób "inteligentny"
+
 
 
 Taski:
@@ -18,3 +20,8 @@ Taski:
 	II)Usuwanie s³owa z listy, odœwierzanie listy. (DONE)
 	III) Edycja wszystkich pól w nowym oknie. Po ukoñczeniu edycji powrót do listy (DONE)
 	IV) dodaæ wyœwietlanie aktualnej wartoœci, daty ostatniej próby, iloœci prób (DONE)
+	
+2) 
+	I) Wyœwietlaæ losowe s³owo. (DONE)
+	II) Updateowaæ wartoœæ s³owa przy u¿yciu odowiednich przycisków.
+	III) Updateowaæ czas zapytania.

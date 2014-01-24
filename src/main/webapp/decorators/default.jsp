@@ -32,6 +32,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="${pageContext.request.contextPath}/">Home</a></li>
                 <li><a href="${pageContext.request.contextPath}/allwords.htm">All words</a></li>
+                <li><a href="${pageContext.request.contextPath}/question.htm">Teach</a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
