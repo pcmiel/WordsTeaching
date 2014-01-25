@@ -22,13 +22,13 @@
             <th>Foreign</th>
             <th>Questions number</th>
             <th>Last question date</th>
-            
+            <th>Knowledge</th>
+
         </tr>
         </thead>
         <tbody>
         <% int id = 1; %>
         <c:forEach var="word" items="${words}">
-            <%--<form:form action="${pageContext.servletContext.contextPath}/edit.htm" commandName="word">--%>
             <tr>
                 <td><%=id%>
                 </td>
@@ -36,12 +36,10 @@
                 <td><c:out value="${word.foreignWord}"/></td>
                 <td><c:out value="${word.questionNumber}"/></td>
                 <td><c:out value="${word.lastQuestionDate}"/></td>
-                    <%--<td><input type="submit" class="btn btn-default" value="Edit" name="edit"/></td>--%>
-                <td><input name="id" value="${word.id}"></td>
-                <td><a href="${pageContext.request.contextPath}/edit/${word.id}.htm">Edit</a></td>
-                <td><a href="${pageContext.request.contextPath}/delete/${word.id}.htm">Delete</a></td>
+                <td><c:out value="${word.knowValue}"/></td>
+                <td><a href="${pageContext.request.contextPath}/edit/${word.id}.htm">Edit</a>
+                    <a href="${pageContext.request.contextPath}/delete/${word.id}.htm">Delete</a></td>
             </tr>
-            <%--</form:form>--%>
             <% id++; %>
         </c:forEach>
         </tbody>

@@ -47,7 +47,7 @@ public class WordsController {
             word.setOryginal(form.getOryginal());
             word.setForeignWord(form.getForeignWord());
             word.setKnowValue(0);
-            word.setQuestionNumber(6);
+            word.setQuestionNumber(0);
             word.setLastQuestionDate(new Date());
             
             wordFacade.create(word);
@@ -112,11 +112,45 @@ public class WordsController {
     @Transactional
     @RequestMapping(value = "question", method = RequestMethod.GET)
     public ModelAndView question(Map<String, Object> model) {
+        return getNewQuestion();
+    }
+
+
+    @ModelAttribute("answer")
+    public WordForm answerWordForm() {
+        return new WordForm();
+    }
+    
+    @RequestMapping(value="/answer", params="correct", method=RequestMethod.POST)
+    public ModelAndView correctAnswer(@ModelAttribute("answer") WordForm wordForm) {
+        updateWardValueAndDate(wordForm.getID(), 1, new Date());
+        return getNewQuestion();
+    }
+
+    @RequestMapping(value="/answer", params="wrong", method=RequestMethod.POST)
+    public ModelAndView wrongAnswer(@ModelAttribute("answer") WordForm wordForm) {
+        updateWardValueAndDate(wordForm.getID(), -1, new Date());
+        return getNewQuestion();
+    }
+    
+    private void updateWardValueAndDate(Long id, int addValue, Date date){
+        Word word = wordFacade.find(id);
+        if(word != null){
+            word.setLastQuestionDate(date);
+            word.setQuestionNumber(word.getQuestionNumber()+1);
+            word.setKnowValue(word.getKnowValue() + addValue);
+            wordFacade.edit(word);
+        }
+    }
+                                                                    
+    private ModelAndView getNewQuestion(){
+        return new ModelAndView("question", "word", getRandomWord());
+    }
+
+    private Word getRandomWord() {
         List<Word> words = wordFacade.findAll();
         Random rand = new Random();
         int wordIndex = rand.nextInt(words.size());
-        Word word = words.get(wordIndex);
-        return new ModelAndView("question", "word", word);
+        return words.get(wordIndex);
     }
-
 }

@@ -23,5 +23,5 @@ Taski:
 	
 2) 
 	I) Wyœwietlaæ losowe s³owo. (DONE)
-	II) Updateowaæ wartoœæ s³owa przy u¿yciu odowiednich przycisków.
-	III) Updateowaæ czas zapytania.
+	II) Updateowaæ wartoœæ s³owa przy u¿yciu odowiednich przycisków. (DONE)
+	III) Updateowaæ czas zapytania. (DONE)

@@ -13,6 +13,7 @@
 <div class="page-header">
     <h1>Question:</h1>
 </div>
+<form:form action="${pageContext.servletContext.contextPath}/answer.htm" commandName="answer">
 <div class="span6 offset3">
     <table class="table table-hover ">
         <thead class="panel-heading">
@@ -21,13 +22,22 @@
             <th>Foreign</th>
         </tr>
         </thead>
-        <tbody>
-            <td><c:out value="${word.oryginal}"/></td>
-            <td><c:out value="${word.foreignWord}"/></td>
+        <tbody>             
+            <td><form:label path="oryginal" /><c:out  value="${word.oryginal}"/></td>
+            <td><form:label path="foreignWord" /><c:out  value="${word.foreignWord}"/></td>
+            <td><form:input path="ID" value="${word.id}"/></td>
+            
         </tr>
         </tbody>
     </table>
+        <div>
+            <input type="submit" class="btn btn-info btn-lg" value="OK" name="correct"/>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-info btn-lg" value="?" name="wrong"/>
+        </div>
 
-</div>
+</div
+</form:form>
 </body>
 </html>
