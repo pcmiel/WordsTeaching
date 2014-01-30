@@ -2,6 +2,7 @@ package com.juri.words.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * User: cmiel
@@ -26,6 +27,18 @@ public class Word  extends BaseEntity {
 
     @Column(name="QUESTION_NUMBER", nullable = false)
     private Integer questionNumber;
+
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name="WORD_ID")
+    private Set<Question> questions;
+
+    public Set<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Set<Question> questions) {
+        this.questions = questions;
+    }
 
     public Integer getQuestionNumber() {
         return questionNumber;

@@ -1,7 +1,9 @@
 package com.juri.words.controller;
 
+import com.juri.words.entity.Question;
 import com.juri.words.entity.Word;
 import com.juri.words.facade.WordFacade;
+import com.juri.words.facade.QuestionFacade;
 
 import com.juri.words.form.WordForm;
 import com.juri.words.util.InformationGenerator;
@@ -23,6 +25,9 @@ public class WordsController {
 
     @Autowired
     private WordFacade wordFacade;
+
+    @Autowired
+    private QuestionFacade questionFacade;
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public ModelAndView showMainView(@ModelAttribute("changepassword") String info) {
@@ -49,6 +54,10 @@ public class WordsController {
             word.setKnowValue(0);
             word.setQuestionNumber(0);
             word.setLastQuestionDate(new Date());
+            Question question = createQuestion(1, new Date());
+            Set<Question> questions = new HashSet<Question>();
+            questions.add(question);
+            word.setQuestions(questions);
             
             wordFacade.create(word);
             form.setOryginal("");
@@ -123,6 +132,7 @@ public class WordsController {
     
     @RequestMapping(value="/answer", params="correct", method=RequestMethod.POST)
     public ModelAndView correctAnswer(@ModelAttribute("answer") WordForm wordForm) {
+        
         updateWardValueAndDate(wordForm.getID(), 1, new Date());
         return getNewQuestion();
     }
@@ -132,17 +142,30 @@ public class WordsController {
         updateWardValueAndDate(wordForm.getID(), -1, new Date());
         return getNewQuestion();
     }
-    
+
+    @Transactional
     private void updateWardValueAndDate(Long id, int addValue, Date date){
         Word word = wordFacade.find(id);
         if(word != null){
+            Set<Question> questions = word.getQuestions();
+            Question question = createQuestion(addValue, date);
+            questions.add(question);
             word.setLastQuestionDate(date);
-            word.setQuestionNumber(word.getQuestionNumber()+1);
+            word.setQuestionNumber(word.getQuestionNumber() + 1);
             word.setKnowValue(word.getKnowValue() + addValue);
+            word.setQuestions(questions);
             wordFacade.edit(word);
         }
     }
-                                                                    
+
+    private Question createQuestion(int addValue, Date date) {
+        Question question = new Question();
+        question.setCorrectAnswer(addValue>0);
+        question.setQuestionDate(date);
+        questionFacade.create(question);
+        return question;
+    }
+
     private ModelAndView getNewQuestion(){
         return new ModelAndView("question", "word", getRandomWord());
     }
